@@ -4,11 +4,11 @@ Nightwatch Visual Regression Testing tools for nightwatch.js
 
 ## Description
 
-Nightwatch VRT provides extends [nightwatch.js](http://nightwatchjs.org/) with an assertion that captures a screenshot of a DOM element identified by a selector and compares the screenshot against a baseline screenshot. If the baseline screenshot does not exist, it'll be created the first time you run the test and the assertion will pass.
+Nightwatch VRT extends [nightwatch.js](http://nightwatchjs.org/) with an assertion that captures a screenshot of a DOM element identified by a selector and compares the screenshot against a baseline screenshot. If the baseline screenshot does not exist, it will be created the first time you run the test and the assertion will pass.
 
-## Configuration 
+## Configuration
 
-In order to use nightwatch-vrt, you should include the following sections in your nightwatch [configuration file](http://nightwatchjs.org/gettingstarted#settings-file) 
+In order to use nightwatch-vrt, you should include the following sections in your nightwatch [configuration file](http://nightwatchjs.org/gettingstarted#settings-file)
 
 #### Custom commands and assertions
 
@@ -25,7 +25,7 @@ Register nightwatch-vrt's assertion and commands:
 
 #### Nightwatch vrt custom settings
 
-Include a nightwatch-vrt section nightwatch's [`test_settings`](http://nightwatchjs.org/gettingstarted#test-settings) section
+Add nightwatch-vrt settings to nightwatch's [`test_settings`](http://nightwatchjs.org/gettingstarted#test-settings) section
 
 ```JavaScript
 visual_regression_settings: {
@@ -34,11 +34,11 @@ visual_regression_settings: {
 }
 ```
 
-These settings indicate where the baseline screenshots and the screenshots that indicate why the assertion failed should be stored. 
+These settings indicate where the baseline and failure screenshots should be stored.
 
 ## Usage
 
-In order to use nightwatch-vrt, you only need to invoke the `screenshotIdenticalToBaseline` assertion and pass a selector that identify the DOM element to compare.
+In order to use nightwatch-vrt, you only need to invoke the `screenshotIdenticalToBaseline` assertion and pass a css selector for the DOM element to compare.
 
 
 ```JavaScript
@@ -56,4 +56,4 @@ module.exports = {
 }
 ```
 
-The first time this test is run, a baseline screenshot will be created and stored on disk. You should always register the baseline screenshot in the code repository. Further executions of this test will compare against this baseline. 
+The first time a test is run, a baseline screenshot will be created and stored on disk. You should always register the baseline screenshot in the code repository. Further executions of this test will compare against this baseline.
