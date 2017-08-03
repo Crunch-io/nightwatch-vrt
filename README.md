@@ -49,7 +49,7 @@ module.exports = {
     'Test crunch.io main content is correct': (browser) => {
 
         browser
-            .url('https://crunch.io)
+            .url('https://crunch.io')
             .assert.screenshotIdenticalToBaseline('.body.entry-content')
             .end()
     }
