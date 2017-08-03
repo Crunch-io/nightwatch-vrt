@@ -1,0 +1,11 @@
+{
+  "name": "nightwatch-vrt",
+  "version": "0.0.1",
+  "description": "Nightwatch Visual Regression Testing tools",
+  "main": "index.js",
+  "author": "Crunch.io <dev@crunch.io>",
+  "license": "MIT",
+  "dependencies": {
+    "jimp": "^0.2.28"
+  }
+}
