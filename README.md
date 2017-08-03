@@ -10,7 +10,7 @@ Nightwatch VRT provides extends [nightwatch.js](http://nightwatchjs.org/) with a
 
 In order to use nightwatch-vrt, you should include the following sections in your nightwatch [configuration file](http://nightwatchjs.org/gettingstarted#settings-file) 
 
-### Custom commands and assertions
+#### Custom commands and assertions
 
 Register nightwatch-vrt's assertion and commands:
 
@@ -23,7 +23,7 @@ Register nightwatch-vrt's assertion and commands:
     ]
 ```
 
-### Nightwatch vrt custom settings
+#### Nightwatch vrt custom settings
 
 Include a nightwatch-vrt section nightwatch's [`test_settings`](http://nightwatchjs.org/gettingstarted#test-settings) section
 
