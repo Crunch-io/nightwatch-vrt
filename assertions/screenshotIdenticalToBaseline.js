@@ -1,6 +1,6 @@
 'use strict'
 
-const compareWithBaseline = require('../../vrt-utils/compare-with-baseline')
+const compareWithBaseline = require('../lib/compare-with-baseline')
 
 /**
  * Asserts if a screenshot that captures the visual representation of
