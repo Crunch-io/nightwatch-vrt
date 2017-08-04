@@ -48,7 +48,7 @@ describe('getVrtSettings', () => {
             })
         })
 
-        describe('given visual regression settings defined but failed_screenshots_path property is not', () => {
+        describe('given visual regression settings defined but diff_screenshots_path property is not', () => {
 
             it('should indicate the setting is missing', () => {
                 const nightwatchClient = getNightwatchClient()
