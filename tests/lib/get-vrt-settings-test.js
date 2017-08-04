@@ -63,7 +63,7 @@ describe('getVrtSettings', () => {
                 const calls = nightwatchClient.assert.ok.mock.calls
                 expect(calls[1]).toEqual([
                     false,
-                    'You must define a failed screenshot directory path.'
+                    'You must define a diff screenshot directory path.'
                 ])
             })
         })

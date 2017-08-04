@@ -30,11 +30,11 @@ Add nightwatch-vrt settings to nightwatch's [`test_settings`](http://nightwatchj
 ```JavaScript
 visual_regression_settings: {
     baseline_screenshots_path: 'vrt/baseline',
-    failed_screenshots_path: 'vrt/errors'
+    diff_screenshots_path: 'vrt/diff'
 }
 ```
 
-These settings indicate where the baseline and failure screenshots should be stored.
+These settings indicate where the baseline and diff screenshots should be stored.
 
 ## Usage
 
