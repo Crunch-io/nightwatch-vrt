@@ -23,8 +23,6 @@ describe('getVrtSettings', () => {
                 expect(calls.length).toEqual(1)
                 expect(calls[0]).toEqual([
                     null,
-                    'Object',
-                    null,
                     'Could not access the visual regression settings. Make sure you define a visual_regression_settings property in your nightwatch configuration file.'
                 ])
             })
@@ -45,8 +43,6 @@ describe('getVrtSettings', () => {
                 const calls = nightwatchClient.assert.ok.mock.calls
                 expect(calls[0]).toEqual([
                     false,
-                    'string',
-                    null,
                     'You must define a baseline screenshot directory path.'
                 ])
             })
@@ -67,8 +63,6 @@ describe('getVrtSettings', () => {
                 const calls = nightwatchClient.assert.ok.mock.calls
                 expect(calls[1]).toEqual([
                     false,
-                    'string',
-                    null,
                     'You must define a failed screenshot directory path.'
                 ])
             })
