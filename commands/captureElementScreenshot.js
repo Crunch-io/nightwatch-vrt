@@ -3,7 +3,8 @@
 const EventEmitter = require('events').EventEmitter,
     util = require('util'),
     Jimp = require('jimp'),
-    Buffer = require('buffer').Buffer
+    Buffer = require('buffer').Buffer,
+    promisifyCommand = require('../lib/promisify-command')
 
 /**
  * Takes a screenshot of the visible region encompassed by the bounding rectangle
@@ -11,9 +12,9 @@ const EventEmitter = require('events').EventEmitter,
 *
  * @link
  * @param {string} id ID of the element to route the command to.
- * @param {function} callback Callback function which is called with the screenshot captured.
+ * @param {function} callback Callback function which is called with the captured screenshot as an argument.
 
- * @returns {Object} The screenshot captured. This object is an instance of the Jimp library.
+ * @returns {Object} The captured screenshot. This object is a Jimp (library) image instance.
  */
 function CaptureElementScreenshot() {
     EventEmitter.call(this)
@@ -55,18 +56,6 @@ CaptureElementScreenshot.prototype.command = function command(selector, callback
             )
             this.emit('complete', errorMessage, this)
         })
-}
-
-function promisifyCommand(api, commandName, args = []) {
-    return new Promise((resolve, reject) => {
-        api[commandName](...args.concat((result) => {
-            if (result.status === 0) {
-                resolve(result.value)
-            } else {
-                reject(result.state)
-            }
-        }))
-    })
 }
 
 module.exports = CaptureElementScreenshot
