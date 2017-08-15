@@ -33,6 +33,16 @@ CaptureElementScreenshot.prototype.command = function command(selector, callback
         const { x, y } = location,
             { width, height } = size
 
+        if (width === 0 || height === 0) {
+            this.client.assertion(
+                false,
+                null,
+                null,
+                `The element identified by the selector ${selector} is not visible or its dimensions equals 0. width: ${width}, height: ${height}`,
+                true
+            )
+        }
+
         Jimp.read(new Buffer(screenshotEncoded, 'base64')).then((screenshot) => {
             screenshot.crop(x, y, width, height)
             this.client.assertion(
