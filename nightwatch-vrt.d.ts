@@ -5,8 +5,8 @@ interface NightwatchVRTSettings {
   "latest_suffix"?: string;
   "diff_screenshots_path"?: string;
   "diff_suffix"?: string;
-  "screenshotPath": (browser: NightwatchAPI) => string;
   "threshold"?: number;
+  "screenshotPath": (browser: NightwatchAPI) => string;
   "prompt"?: boolean;
 }
 
