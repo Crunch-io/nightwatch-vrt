@@ -25,11 +25,10 @@ interface NightwatchAssertions {
      * that order. Further assertions will compare against the screenshot that was
      * saved in the first execution of the assertion.
      *
-     * @param {String} elementId Selector that identifies the Element that will be captured
-     * in the screenshot.
-     * @param {String} fileName Optional fileName to save as; defaults to elementId
-     * @param {NightwatchVRTOptions} settings Optional nightwatch-vrt settings; these override what is found under test_settings
-     * @param {String} message Optional message to log
+     * @param {String} elementId Identifies the element that will be captured in the screenshot.
+     * @param {String} fileName Optional file name for this screenshot; defaults to the selector
+     * @param {NightwatchVRTOptions} settings Optional settings to override the defaults and `visual_regression_settings`
+     * @param {String} message Optional message for `nightwatch` to log upon completion
      */
     screenshotIdenticalToBaseline: (elementId: string, fileName?: string, options?: NightwatchVRTSettings, message?: string) => this;
 }
@@ -40,7 +39,7 @@ interface NightwatchAPI {
      * of an element.
     *
      * @link
-     * @param {string} elementId ID of the element to route the command to.
+     * @param {string} selector Identifies the element that will be captured in the screenshot.
      * @param {function} callback Callback function which is called with the captured screenshot as an argument.
      * @returns {Object} The captured screenshot. This object is a Jimp (library) image instance.
      */

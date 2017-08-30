@@ -64,7 +64,7 @@ default: {
 
 The screenshot path generator option accepts a function that generates a dynamic path based on the test properties, and returns that string.
 
-| Argument         | Description                                                                                    |
+| Parameter        | Description                                                                                    |
 |------------------|------------------------------------------------------------------------------------------------|
 | nightwatchClient | The nightwatch client test instance                                                            |
 | basePath         | The base path for the screenshot set in `visual_regression_settings` (e.g. *_screenshots_path) |
@@ -84,19 +84,22 @@ function generateScreenshotFilePath(nightwatchClient, basePath, fileName) {
 
 ## Usage
 
-In order to use `nightwatch-vrt`, you only need to invoke the `screenshotIdenticalToBaseline` assertion and pass a css selector for the DOM element to compare. The css selector will be used as the file name, unless a second *optional* name parameter is passed.
+In order to use `nightwatch-vrt`, you only need to invoke the `screenshotIdenticalToBaseline` assertion and pass a css selector for the DOM element to compare. You may also pass a custom filename, `visual_regression_settings` overrides, and a custom log message.
+
+| Parameter        | Description                                                                                    |
+|------------------|------------------------------------------------------------------------------------------------|
+| selector         | Identifies the element that will be captured in the screenshot.                                |
+| fileName         | Optional file name for this screenshot; defaults to the selector                               |
+| settings         | Optional settings to override the defaults and `visual_regression_settings`                    |
+| message          | Optional message for `nightwatch` to log upon completion                                       |
 
 
 ```JavaScript
-'use strict'
-
 module.exports = {
-
     'Test crunch.io main content is correct': (browser) => {
-
         browser
             .url('https://crunch.io')
-            .assert.screenshotIdenticalToBaseline('.body.entry-content',  /* Optional */ 'custom-name')
+            .assert.screenshotIdenticalToBaseline('.body.entry-content',  /* Optional */ 'custom-name', {threshold: 0.5}, 'VRT custom-name complete.')
             .end()
     }
 }
