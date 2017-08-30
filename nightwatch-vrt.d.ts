@@ -31,7 +31,7 @@ interface NightwatchAssertions {
      * @param {NightwatchVRTOptions} settings Optional nightwatch-vrt settings; these override what is found under test_settings
      * @param {String} message Optional message to log
      */
-    screenshotIdenticalToExpected: (elementId: string, fileName?: string, options?: NightwatchVRTSettings, message?: string) => this;
+    screenshotIdenticalToBaseline: (elementId: string, fileName?: string, options?: NightwatchVRTSettings, message?: string) => this;
 }
 
 interface NightwatchAPI {
@@ -44,5 +44,5 @@ interface NightwatchAPI {
      * @param {function} callback Callback function which is called with the captured screenshot as an argument.
      * @returns {Object} The captured screenshot. This object is a Jimp (library) image instance.
      */
-    captureElementScreenshot: (elementId: string, callback?: (arg?: Jimp) => void) => this
+    captureElementScreenshot: (elementId: string, callback?: (arg?: any) => void) => this
 }
