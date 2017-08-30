@@ -29,7 +29,7 @@ exports.assertion = function screenshotIdenticalToBaseline(
     msg
 ) {
 
-    this.message = msg || `Screenshot for element <${elementId}> was identical or overriden.`
+    this.message = msg || `Screenshot for element <${elementId}> was identical or overridden.`
     this.expected = true
 
     this.pass = function pass(value) {
