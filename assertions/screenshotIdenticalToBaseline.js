@@ -29,7 +29,7 @@ exports.assertion = function screenshotIdenticalToBaseline(
     msg
 ) {
 
-    this.message = msg || `Screenshot for element <${elementId}> was identical or overridden.`
+    this.message = msg || `Visual regression test results for element <${elementId}>.`
     this.expected = true
 
     this.pass = function pass(value) {
