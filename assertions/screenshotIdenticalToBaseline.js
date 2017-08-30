@@ -7,8 +7,8 @@ const compareWithBaseline = require('../lib/compare-with-baseline')
  * an element in the application is identical to a previously captured
  * screenshot used as a baseline.
  *
- * When this assertion is executed and the baseline screenshot doesn't exists,
- * it will use save captured screenshot as the baseline and the assertion will succeed.
+ * When this assertion is executed and the baseline screenshot doesn't exist,
+ * it will save the captured screenshot as the baseline and the assertion will succeed.
  *
  * The baseline screenshot will be saved in the baseline directory passed in
  * the settings here, or the directory specified in the nightwatch configuration
