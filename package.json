@@ -18,6 +18,7 @@
     "bugs": {
         "url": "https://gitlab.com/Crunch-io/nightwatch-vrt/issues"
     },
+    "main": "index.js",
     "types": "nightwatch-vrt.d.ts",
     "scripts": {
         "lint": "eslint lib assertions commands",
