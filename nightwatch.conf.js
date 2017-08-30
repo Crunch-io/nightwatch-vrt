@@ -29,7 +29,7 @@ function defaultScreenshotPath(nightwatchClient, basePath, fileName) {
         (nightwatchClient.options.desiredCapabilities.browserName || 'UNKNOWN'),
         (nightwatchClient.options.desiredCapabilities.version || 'UNKNOWN'),
         nightwatchClient.currentTest.name,
-        fileName.replace(/ /g, '_') + '.png'
+        fileName.replace(/ /g, '_')
     );
 }
 
