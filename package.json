@@ -1,6 +1,6 @@
 {
     "name": "nightwatch-vrt",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "Nightwatch Visual Regression Testing tools",
     "license": "MIT",
     "author": "Crunch.io <dev@crunch.io>",
@@ -9,6 +9,15 @@
             "name": "Connor Schlesiger",
             "email": "connor@schlesiger.ca"
         }
+    ],
+    "keywords": [
+        "selenium",
+        "selenium-webdriver",
+        "css-testing",
+        "nightwatchjs",
+        "e2e-tests",
+        "visual-regression-testing",
+        "nightwatch"
     ],
     "homepage": "https://gitlab.com/Crunch-io/nightwatch-vrt",
     "repository": {
