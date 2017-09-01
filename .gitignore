@@ -2,3 +2,4 @@ node_modules
 yarn.lock
 reports
 selenium-debug.log
+package-lock.json

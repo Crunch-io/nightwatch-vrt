@@ -18,16 +18,15 @@
     "bugs": {
         "url": "https://gitlab.com/Crunch-io/nightwatch-vrt/issues"
     },
-    "main": "index.js",
     "types": "nightwatch-vrt.d.ts",
     "scripts": {
         "lint": "eslint lib assertions commands",
         "test:dev": "jest --watch --notify",
         "test": "jest --coverage",
-        "e2e": "node nightwatch.conf.js && run-p --race start nightwatch",
-        "start": "http-server demo --silent",
-        "nightwatch": "sleep 1 && nightwatch -e phantomjs",
-        "clean": "rimraf node_modules package-lock.json reports"
+        "clean": "rimraf node_modules package-lock.json reports",
+        "demo": "node demo/nightwatch.conf.js && run-p --race demo:start demo:nightwatch",
+        "demo:start": "http-server demo --silent",
+        "demo:nightwatch": "sleep 1 && nightwatch --config demo/nightwatch.conf.js --env phantomjs"
     },
     "jest": {
         "roots": [

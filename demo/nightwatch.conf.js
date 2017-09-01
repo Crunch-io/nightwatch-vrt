@@ -1,26 +1,26 @@
 'use strict'
 
-const fs = require('fs');
-const path = require('path');
-const rimraf = require('rimraf');
-const seleniumStandAlone = require('selenium-standalone');
+const fs = require('fs')
+const path = require('path')
+const rimraf = require('rimraf')
+const seleniumStandAlone = require('selenium-standalone')
 
-const DEVELOPMENT = process.env.NODE_ENV === 'development';
+const DEVELOPMENT = process.env.NODE_ENV === 'development'
 
-const REPORTS_PATH = path.join(__dirname, 'reports', 'e2e');
-const SCREENSHOT_PATH = path.join(__dirname, 'reports', 'screenshots');
-const BINPATH = path.join(__dirname, 'node_modules', 'nightwatch', 'bin');
+const REPORTS_PATH = path.join(__dirname, 'reports', 'e2e')
+const SCREENSHOT_PATH = path.join(__dirname, 'reports', 'screenshots')
+const BINPATH = path.join(process.cwd(), 'node_modules', 'nightwatch', 'bin')
 
-const SELENIUM_VERSION = '3.5.2'; // https://selenium-release.storage.googleapis.com/index.html
-const SELENIUM_PATH = path.join(BINPATH, 'selenium-server', SELENIUM_VERSION + '-' + 'server.jar');
-const CHROME_DRIVER_VERSION = '2.31'; // https://chromedriver.storage.googleapis.com/index.html
-const CHROME_PATH = path.join(BINPATH, 'chromedriver', CHROME_DRIVER_VERSION + '-' + process.arch + '-' + 'chromedriver');
-const IE_DRIVER_VERSION = SELENIUM_VERSION; // https://selenium-release.storage.googleapis.com/index.html
-const GECKO_DRIVER_VERSION = '0.18.0'; // https://github.com/mozilla/geckodriver/releases
-const GECKO_PATH = path.join(BINPATH, 'geckodriver', GECKO_DRIVER_VERSION + '-' + process.arch + '-' + 'geckodriver');
-const GHOST_DRIVER_VERSION = '2.1.0'; // https://github.com/detro/ghostdriver/releases
-const GHOST_PATH = '2.1.0';
-const PHANTOMJS_PATH = path.join(__dirname, 'node_modules', 'phantomjs-prebuilt', 'bin', 'phantomjs');
+const SELENIUM_VERSION = '3.5.2' // https://selenium-release.storage.googleapis.com/index.html
+const SELENIUM_PATH = path.join(BINPATH, 'selenium-server', SELENIUM_VERSION + '-' + 'server.jar')
+const CHROME_DRIVER_VERSION = '2.31' // https://chromedriver.storage.googleapis.com/index.html
+const CHROME_PATH = path.join(BINPATH, 'chromedriver', CHROME_DRIVER_VERSION + '-' + process.arch + '-' + 'chromedriver')
+const IE_DRIVER_VERSION = SELENIUM_VERSION // https://selenium-release.storage.googleapis.com/index.html
+const GECKO_DRIVER_VERSION = '0.18.0' // https://github.com/mozilla/geckodriver/releases
+const GECKO_PATH = path.join(BINPATH, 'geckodriver', GECKO_DRIVER_VERSION + '-' + process.arch + '-' + 'geckodriver')
+const GHOST_DRIVER_VERSION = '2.1.0' // https://github.com/detro/ghostdriver/releases
+const GHOST_PATH = '2.1.0'
+const PHANTOMJS_PATH = path.join(__dirname, 'node_modules', 'phantomjs-prebuilt', 'bin', 'phantomjs')
 
 function defaultScreenshotPath(nightwatchClient, basePath, fileName) {
     return path.join(
@@ -30,18 +30,18 @@ function defaultScreenshotPath(nightwatchClient, basePath, fileName) {
         (nightwatchClient.options.desiredCapabilities.version || 'UNKNOWN'),
         nightwatchClient.currentTest.name,
         fileName.replace(/ /g, '_')
-    );
+    )
 }
 
 module.exports = {
     "src_folders": [
-        "e2e"
-    ],
-    "custom_commands_path": [
-        "./commands"
+        "demo"
     ],
     "custom_assertions_path": [
-        "./assertions"
+        path.join(process.cwd(), "assertions")
+    ],
+    "custom_commands_path": [
+        path.join(process.cwd(), "commands")
     ],
     "output_folder": REPORTS_PATH,
     "selenium": {
@@ -119,7 +119,7 @@ module.exports = {
 fs.stat(SELENIUM_PATH, function(err, stat) {
     if (err || !stat || stat.size < 1) {
         rimraf(path.join(BINPATH, 'chromedriver'), function(rmerr) {
-            if (rmerr) throw new Error(rmerr);
+            if (rmerr) throw new Error(rmerr)
             seleniumStandAlone.install({
                 basePath: BINPATH,
                 version: SELENIUM_VERSION,
@@ -144,9 +144,9 @@ fs.stat(SELENIUM_PATH, function(err, stat) {
                 logger: function(message) {},
                 progressCb: function(totalLength, progressLength, chunkLength) {}
             }, function(error, child) {
-                if (error) throw new Error(error);
-                console.log(' \x1b[32m✔\x1b[0m Drivers downloaded to:', BINPATH);
-            });
+                if (error) throw new Error(error)
+                console.log(' \x1b[32m✔\x1b[0m Drivers downloaded to:', BINPATH)
+            })
         })
     }
-});
+})
