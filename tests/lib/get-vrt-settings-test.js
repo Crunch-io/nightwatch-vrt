@@ -1,6 +1,17 @@
 'use strict'
 
-const getVrtSettings = require('../../lib/get-vrt-settings')
+const getVrtSettings = require('../../lib/get-vrt-settings'),
+    defaultSettings = {
+        latest_screenshots_path: 'vrt/latest',
+        latest_suffix: '',
+        baseline_screenshots_path: 'vrt/baseline',
+        baseline_suffix: '',
+        diff_screenshots_path: 'vrt/diff',
+        diff_suffix: '',
+        threshold: 0.0,
+        prompt: false,
+        always_save_diff_screenshot: false
+    }
 
 describe('getVrtSettings', () => {
     function getNightwatchClient() {
@@ -14,58 +25,23 @@ describe('getVrtSettings', () => {
     describe('when getting visual regression settings', () => {
 
         describe('given no visual regression settings defined', () => {
-
-            it('should indicate that visual regression settings were not found', () => {
+            it('should return default settings', () => {
                 const nightwatchClient = getNightwatchClient()
                 const settings = getVrtSettings(nightwatchClient)
-                const calls = nightwatchClient.assert.ok.mock.calls
 
-                expect(calls.length).toEqual(1)
-                expect(calls[0]).toEqual([
-                    null,
-                    'Could not access the visual regression settings. Make sure you define a visual_regression_settings property in your nightwatch configuration file.'
-                ])
+                expect(settings).toEqual(defaultSettings)
             })
         })
 
-        describe('given visual regression settings defined but baseline_screenshot_path property is not', () => {
-
-            it('should indicate the setting is missing', () => {
+        describe('given partial test-scoped visual regression settings defined', () => {
+            it('should return default settings', () => {
                 const nightwatchClient = getNightwatchClient()
+                const settings = getVrtSettings(nightwatchClient, {threshold: 0.5})
+                const modifiedSettings = Object.assign({}, defaultSettings, {threshold: 0.5})
 
-                nightwatchClient.globals = {
-                    test_settings: {
-                        visual_regression_settings: {}
-                    }
-                }
-
-                const settings = getVrtSettings(nightwatchClient)
-                const calls = nightwatchClient.assert.ok.mock.calls
-                expect(calls[0]).toEqual([
-                    false,
-                    'You must define a baseline screenshot directory path.'
-                ])
+                expect(settings).toEqual(modifiedSettings)
             })
         })
 
-        describe('given visual regression settings defined but diff_screenshots_path property is not', () => {
-
-            it('should indicate the setting is missing', () => {
-                const nightwatchClient = getNightwatchClient()
-
-                nightwatchClient.globals = {
-                    test_settings: {
-                        visual_regression_settings: {}
-                    }
-                }
-
-                const settings = getVrtSettings(nightwatchClient)
-                const calls = nightwatchClient.assert.ok.mock.calls
-                expect(calls[1]).toEqual([
-                    false,
-                    'You must define a diff screenshot directory path.'
-                ])
-            })
-        })
     })
 })

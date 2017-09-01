@@ -14,6 +14,6 @@ describe('generateScreenshotFilePath', () => {
 
     it('should generate a file path by using the basePath parameter, and the current test name and module', () => {
         expect(generateScreenshotFilePath(getNightwatchClient(), 'baseline'))
-            .toEqual(`${process.cwd()}/baseline/visualizations/bar-plots.png`)
+            .toEqual(`${process.cwd()}/baseline/visualizations/bar-plots`)
     })
 })
