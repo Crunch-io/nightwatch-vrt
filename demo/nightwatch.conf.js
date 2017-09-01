@@ -35,7 +35,7 @@ function defaultScreenshotPath(nightwatchClient, basePath, fileName) {
 
 module.exports = {
     "src_folders": [
-        "demo"
+        "demo/tests"
     ],
     "custom_assertions_path": [
         path.join(process.cwd(), "assertions")
@@ -66,7 +66,7 @@ module.exports = {
                 "baseline_suffix": '.baseline',
                 //"diff_screenshots_path": ''
                 "diff_suffix": '.diff',
-                "threshold": 0.1,
+                "threshold": 0.01,
                 "prompt": true,
                 "always_save_diff_screenshot": false
             },
