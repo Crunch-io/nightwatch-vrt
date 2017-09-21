@@ -32,8 +32,8 @@ CaptureElementScreenshot.prototype.command = function command(
         promisifyCommand(api, 'getElementSize', [selector]),
         promisifyCommand(api, 'screenshot', [false])
     ]).then(([location, size, screenshotEncoded]) => {
-        const { x, y } = location,
-            { width, height } = size
+        const { x, y } = location
+        let { width, height } = size
 
         if (width === 0 || height === 0) {
             this.client.assertion(
@@ -46,6 +46,22 @@ CaptureElementScreenshot.prototype.command = function command(
         }
 
         Jimp.read(new Buffer(screenshotEncoded, 'base64')).then((screenshot) => {
+            /**
+             * https://www.w3.org/TR/webdriver/#take-screenshot
+             * "The Take Screenshot command takes a screenshot of the top-level browsing context’s viewport."
+             *
+             * If the target element extends outside of the viewport, the expected
+             * dimentions will exceed the actual dimensions, resulting in a
+             * "RangeError: out of range index" exception (from Buffer)
+             */
+            if (height < screenshot.bitmap.height) {
+                height = screenshot.bitmap.height
+            }
+
+            if (width < screenshot.bitmap.width) {
+                width = screenshot.bitmap.width
+            }
+
             screenshot.crop(x, y, width, height)
             this.client.assertion(
                 true,
