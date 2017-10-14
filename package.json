@@ -19,15 +19,15 @@
         "visual-regression-testing",
         "nightwatch"
     ],
-    "homepage": "https://gitlab.com/Crunch-io/nightwatch-vrt",
+    "homepage": "https://github.com/Crunch-io/nightwatch-vrt",
     "repository": {
         "type": "git",
-        "url": "git+https://gitlab.com/Crunch-io/nightwatch-vrt.git"
+        "url": "git+https://github.com/Crunch-io/nightwatch-vrt.git"
     },
     "bugs": {
-        "url": "https://gitlab.com/Crunch-io/nightwatch-vrt/issues"
+        "url": "https://github.com/Crunch-io/nightwatch-vrt/issues"
     },
-    "types": "nightwatch-vrt.d.ts",
+    "types": "index",
     "scripts": {
         "lint": "eslint lib assertions commands",
         "test:dev": "jest --watch --notify",
