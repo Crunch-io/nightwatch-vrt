@@ -40,12 +40,24 @@ exports.assertion = function screenshotIdenticalToBaseline(
     }
 
     this.command = function command(callback) {
+        let screenshot,
+            comparisonResult
 
         this
             .api
             .waitForElementVisible(elementId, 5000)
-            .captureElementScreenshot(elementId, (screenshot) => {
-                compareWithBaseline(this.api, screenshot, fileName, settings).then(callback)
+            .captureElementScreenshot(elementId, (elementScreenshot) => {
+                screenshot = elementScreenshot
+            })
+            .perform((done) => {
+                compareWithBaseline(this.api, screenshot, fileName, settings).then((result) => {
+                    comparisonResult = result
+                    done()
+                })
+            })
+            .perform((done) => {
+                callback(comparisonResult)
+                done()
             })
 
         return this
