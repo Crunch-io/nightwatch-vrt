@@ -54,12 +54,12 @@ CaptureElementScreenshot.prototype.command = function command(
              * dimentions will exceed the actual dimensions, resulting in a
              * "RangeError: out of range index" exception (from Buffer)
              */
-            if (height < screenshot.bitmap.height) {
-                height = screenshot.bitmap.height
+            if ((y + height) > screenshot.bitmap.height) {
+                height = (screenshot.bitmap.height - y)
             }
 
-            if (width < screenshot.bitmap.width) {
-                width = screenshot.bitmap.width
+            if ((x + width) > screenshot.bitmap.width) {
+                width = (screenshot.bitmap.width - x)
             }
 
             screenshot.crop(x, y, width, height)
