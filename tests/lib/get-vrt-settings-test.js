@@ -14,7 +14,7 @@ const getVrtSettings = require('../../lib/get-vrt-settings'),
     }
 
 describe('getVrtSettings', () => {
-    function getNightwatchClient() {
+    function getNightwatchClient(customSettings = {}) {
         return {
             assert: {
                 ok: jest.fn()
@@ -30,6 +30,42 @@ describe('getVrtSettings', () => {
                 const settings = getVrtSettings(nightwatchClient)
 
                 expect(settings).toEqual(defaultSettings)
+            })
+        })
+
+        describe('given visual regression settings are defined in the nightwatch globals settings section', () => {
+
+            it('should return the defined settings', () => {
+                const nightwatchClient = getNightwatchClient()
+                const vrtSettings = {
+                    threshold: 0.2,
+                    diff_screenshots_path: 'vrt/custom-diffs'
+                }
+
+                nightwatchClient.globals = {
+                    visual_regression_settings: vrtSettings
+                }
+
+                const settings = getVrtSettings(nightwatchClient)
+                expect(settings).toMatchObject(vrtSettings)
+            })
+        })
+
+        describe('given visual regression settings are defined in the nightwatch globals settings section within a test_settings object', () => {
+
+            it('should return the defined settings', () => {
+                const nightwatchClient = getNightwatchClient()
+                const vrtSettings = {
+                    threshold: 0.2,
+                    diff_screenshots_path: 'vrt/custom-diffs'
+                }
+
+                nightwatchClient.globals = {
+                    test_settings: { visual_regression_settings: vrtSettings }
+                }
+
+                const settings = getVrtSettings(nightwatchClient)
+                expect(settings).toMatchObject(vrtSettings)
             })
         })
 

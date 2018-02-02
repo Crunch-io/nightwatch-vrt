@@ -28,20 +28,22 @@ Register `nightwatch-vrt`'s assertion and commands:
 
 #### Nightwatch VRT custom settings
 
-Then, for global settings, add the `visual_regression_settings` entry to nightwatch's `test_settings` [`test_settings`](http://nightwatchjs.org/gettingstarted#test-settings) section
+Then, for global settings, add the `visual_regression_settings` entry to nightwatch's `globals` [`globals`](http://nightwatchjs.org/gettingstarted#test-settings) section
 
 ```JSON
 default: {
-    "visual_regression_settings": {
-        "generate_screenshot_path": defaultScreenshotPathGenerator,
-        "latest_screenshots_path": "vrt/latest",
-        "latest_suffix": "",
-        "baseline_screenshots_path": "vrt/baseline",
-        "baseline_suffix": "",
-        "diff_screenshots_path": "vrt/diff",
-        "diff_suffix": "",
-        "prompt": false,
-        "always_save_diff_screenshot": false
+    "globals": {
+        "visual_regression_settings": {
+            "generate_screenshot_path": defaultScreenshotPathGenerator,
+            "latest_screenshots_path": "vrt/latest",
+            "latest_suffix": "",
+            "baseline_screenshots_path": "vrt/baseline",
+            "baseline_suffix": "",
+            "diff_screenshots_path": "vrt/diff",
+            "diff_suffix": "",
+            "prompt": false,
+            "always_save_diff_screenshot": false
+        }
     }
 }
 ```
