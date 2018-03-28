@@ -32,7 +32,7 @@ CaptureElementScreenshot.prototype.command = function command(
         promisifyCommand(api, 'getElementSize', [selector]),
         promisifyCommand(api, 'screenshot', [false])
     ]).then(([location, size, screenshotEncoded]) => {
-        const { x, y } = location
+        let { x, y } = location
         let { width, height } = size
 
         /*
@@ -43,6 +43,8 @@ CaptureElementScreenshot.prototype.command = function command(
           return window.devicePixelRatio
         }, [], function (devicePixelRatio) {
           if (devicePixelRatio.value > 1) {
+            x *= devicePixelRatio.value
+            y *= devicePixelRatio.value
             width *= devicePixelRatio.value
             height *= devicePixelRatio.value
           }
