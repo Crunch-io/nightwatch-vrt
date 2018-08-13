@@ -40,14 +40,12 @@ CaptureElementScreenshot.prototype.command = function command(
          * ensure that we adjust the width and height accordingly
          */
         api.execute(function () {
-          return window.devicePixelRatio
+            return window.devicePixelRatio
         }, [], function (devicePixelRatio) {
-          if (devicePixelRatio.value > 1) {
             x *= devicePixelRatio.value
             y *= devicePixelRatio.value
             width *= devicePixelRatio.value
             height *= devicePixelRatio.value
-          }
         });
 
         if (width === 0 || height === 0) {
