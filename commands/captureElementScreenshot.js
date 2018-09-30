@@ -32,8 +32,21 @@ CaptureElementScreenshot.prototype.command = function command(
         promisifyCommand(api, 'getElementSize', [selector]),
         promisifyCommand(api, 'screenshot', [false])
     ]).then(([location, size, screenshotEncoded]) => {
-        const { x, y } = location
+        let { x, y } = location
         let { width, height } = size
+
+        /*
+         * Here we get the pixel density of the window and 
+         * ensure that we adjust the width and height accordingly
+         */
+        api.execute(function () {
+            return window.devicePixelRatio
+        }, [], function (devicePixelRatio) {
+            x *= devicePixelRatio.value
+            y *= devicePixelRatio.value
+            width *= devicePixelRatio.value
+            height *= devicePixelRatio.value
+        });
 
         if (width === 0 || height === 0) {
             this.client.assertion(
