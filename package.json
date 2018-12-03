@@ -65,7 +65,7 @@
         "eslint-plugin-react": "^7.3.0",
         "http-server": "^0.10.0",
         "jest": "^20.0.4",
-        "nightwatch": "^0.9.16",
+        "nightwatch": "^1.0.14",
         "npm-run-all": "^4.0.2",
         "phantomjs-prebuilt": "^2.1.15",
         "rimraf": "^2.6.1",
