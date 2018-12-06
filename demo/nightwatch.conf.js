@@ -11,7 +11,7 @@ const REPORTS_PATH = path.join(__dirname, 'reports', 'e2e')
 const SCREENSHOT_PATH = path.join(__dirname, 'reports', 'screenshots')
 const BINPATH = path.join(process.cwd(), 'node_modules', 'nightwatch', 'bin')
 
-const SELENIUM_VERSION = '3.5.2' // https://selenium-release.storage.googleapis.com/index.html
+const SELENIUM_VERSION = '3.5.1' // https://selenium-release.storage.googleapis.com/index.html
 const SELENIUM_PATH = path.join(BINPATH, 'selenium-server', SELENIUM_VERSION + '-' + 'server.jar')
 const CHROME_DRIVER_VERSION = '2.31' // https://chromedriver.storage.googleapis.com/index.html
 const CHROME_PATH = path.join(BINPATH, 'chromedriver', CHROME_DRIVER_VERSION + '-' + process.arch + '-' + 'chromedriver')
