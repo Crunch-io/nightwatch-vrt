@@ -1,11 +1,8 @@
-'use strict'
-
 const generateScreenshotFilePath = require('../../lib/generate-screenshot-file-path')
 const path = require('path')
+const set = require('lodash/set')
 
 describe('generateScreenshotFilePath', () => {
-    let customNameFn
-
     function getNightwatchClient() {
         return {
             currentTest: {
@@ -13,11 +10,8 @@ describe('generateScreenshotFilePath', () => {
                 name: 'barPlots'
             },
             globals: {
-                test_settings: {
-                    visual_regression_settings: {
-                        generate_screenshot_path: customNameFn
-                    }
-                }
+                visual_regression_settings: {},
+                test_settings: { visual_regression_settings: {} }
             }
         }
     }
@@ -33,10 +27,35 @@ describe('generateScreenshotFilePath', () => {
     })
 
     it('should pass the correct filename to the custom naming function', () => {
-        customNameFn = (client, basePath, fileName) =>
-            path.join(process.cwd(), basePath, client.currentTest.module, `custom-${fileName}`)
+        const nightwatchClient = getNightwatchClient()
+        const testFn = jest.fn((client, basePath, fileName) =>
+            path.join(process.cwd(), basePath, client.currentTest.module, `test-setting-custom-${fileName}`))
 
-        expect(generateScreenshotFilePath(getNightwatchClient(), 'baseline', 'foo-test'))
+        set(nightwatchClient, 'globals.test_settings.visual_regression_settings.generate_screenshot_path', testFn)
+
+        const result = generateScreenshotFilePath(nightwatchClient, 'baseline', 'foo-test')
+
+        expect(testFn).toHaveBeenCalled()
+        expect(result)
+            .toEqual(`${process.cwd()}/baseline/visualizations/test-setting-custom-foo-test.png`)
+    })
+
+    it('should use the base global setting for generate_screenshot_path if a test_setting exists', () => {
+        const nightwatchClient = getNightwatchClient()
+        const testFn = jest.fn((client, basePath, fileName) =>
+            path.join(process.cwd(), basePath, client.currentTest.module, `test-setting-custom-${fileName}`))
+
+        set(nightwatchClient, 'globals.test_settings.visual_regression_settings.generate_screenshot_path', testFn)
+        
+        const customFn = jest.fn((client, basePath, fileName) =>
+            path.join(process.cwd(), basePath, client.currentTest.module, `custom-${fileName}`))
+
+        set(nightwatchClient, 'globals.visual_regression_settings.generate_screenshot_path', customFn)
+        set(nightwatchClient, 'globals.test_settings.visual_regression_settings.generate_screenshot_path', testFn)
+
+        const result = generateScreenshotFilePath(nightwatchClient, 'baseline', 'foo-test')
+
+        expect(result, 'baseline', 'foo-test')
             .toEqual(`${process.cwd()}/baseline/visualizations/custom-foo-test.png`)
     })
 })
