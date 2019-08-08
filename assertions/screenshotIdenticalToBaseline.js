@@ -53,7 +53,10 @@ exports.assertion = function screenshotIdenticalToBaseline(
                 compareWithBaseline(this.api, screenshot, fileName, settings).then((result) => {
                     comparisonResult = result
                     done()
-                })
+                }, (reject) => {
+                    comparisonResult = reject
+                    done()
+                });
             })
             .perform((done) => {
                 callback(comparisonResult)
