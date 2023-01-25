@@ -34,7 +34,7 @@
 	"types": "index",
 	"scripts": {
 		"lint": "eslint . --fix",
-		"pretty": "prettier --write \"./**/*.{css,html,js,json,xml}\"",
+		"pretty": "prettier --write \"./**/*.{css,html,js,json,ts,xml}\"",
 		"test:dev": "jest --watch --notify",
 		"test": "jest --coverage",
 		"clean": "rimraf node_modules package-lock.json reports",
@@ -55,6 +55,7 @@
 	},
 	"devDependencies": {
 		"@prettier/plugin-xml": "^2.2.0",
+		"@typescript-eslint/eslint-plugin": "^5.49.0",
 		"eslint": "^8.19.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-prettier": "^4.2.1",
@@ -70,7 +71,7 @@
 		"selenium-standalone": "^8.2.5"
 	},
 	"lint-staged": {
-		"*.{js}": ["eslint --cache --fix", "prettier --write"],
+		"*.{js,ts}": ["eslint --cache --fix", "prettier --write"],
 		"*.{css,html,json,xml}": "prettier --write"
 	}
 }

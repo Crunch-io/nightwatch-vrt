@@ -1,12 +1,19 @@
 {
-	"plugins": ["prettier"],
-	"extends": ["plugin:prettier/recommended"],
+	"plugins": ["prettier", "@typescript-eslint"],
+	"extends": [
+		"plugin:prettier/recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:@typescript-eslint/recommended"
+	],
 	"env": {
 		"node": true,
 		"es6": true,
 		"browser": true
 	},
 	"rules": {
+		"@typescript-eslint/no-unused-vars": "off",
+		"@typescript-eslint/consistent-type-definitions": "warn",
+		"@typescript-eslint/no-explicit-any": "warn",
 		"no-unused-vars": "off",
 		"no-console": "off",
 		"prettier/prettier": "error",
