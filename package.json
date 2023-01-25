@@ -1,74 +1,76 @@
 {
-    "name": "nightwatch-vrt",
-    "version": "0.2.8",
-    "description": "Nightwatch Visual Regression Testing tools",
-    "license": "MIT",
-    "author": "Crunch.io <dev@crunch.io>",
-    "contributors": [
-        {
-            "name": "Connor Schlesiger",
-            "email": "connor@schlesiger.ca"
-        },
-        {
-            "name": "Matt Steitle",
-            "email": "msteitle@crunch.io"
-        }
-    ],
-    "keywords": [
-        "selenium",
-        "selenium-webdriver",
-        "css-testing",
-        "nightwatchjs",
-        "e2e-tests",
-        "visual-regression-testing",
-        "nightwatch"
-    ],
-    "homepage": "https://github.com/Crunch-io/nightwatch-vrt",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Crunch-io/nightwatch-vrt.git"
-    },
-    "bugs": {
-        "url": "https://github.com/Crunch-io/nightwatch-vrt/issues"
-    },
-    "types": "index",
-    "scripts": {
-        "lint": "eslint lib assertions commands",
-        "test:dev": "jest --watch --notify",
-        "test": "jest --coverage",
-        "clean": "rimraf node_modules package-lock.json reports",
-        "demo": "node demo/nightwatch.conf.js && run-p --race demo:start demo:nightwatch",
-        "demo:start": "http-server demo --silent",
-        "demo:nightwatch": "sleep 1 && nightwatch --config demo/nightwatch.conf.js --env phantomjs"
-    },
-    "jest": {
-        "roots": [
-            "lib",
-            "assertions",
-            "commands",
-            "tests"
-        ],
-        "testRegex": "-test\\.js$",
-        "coverageDirectory": "reports/coverage",
-        "coverageReporters": [
-            "text-summary",
-            "html"
-        ]
-    },
-    "dependencies": {
-        "jimp": "^0.16.1",
-        "lodash": "^4.17.20"
-    },
-    "devDependencies": {
-        "eslint": "^7.11.0",
-        "eslint-config-crunch": "^1.8.0",
-        "eslint-plugin-react": "^7.21.4",
-        "http-server": "^0.12.3",
-        "jest": "^26.6.0",
-        "nightwatch": "^1.4.3",
-        "npm-run-all": "^4.1.5",
-        "phantomjs-prebuilt": "^2.1.16",
-        "rimraf": "^3.0.2",
-        "selenium-standalone": "^6.20.1"
-    }
+	"name": "nightwatch-vrt",
+	"version": "0.2.8",
+	"description": "Nightwatch Visual Regression Testing tools",
+	"license": "MIT",
+	"author": "Crunch.io <dev@crunch.io>",
+	"contributors": [
+		{
+			"name": "Connor Schlesiger",
+			"email": "connor@schlesiger.ca"
+		},
+		{
+			"name": "Matt Steitle",
+			"email": "msteitle@crunch.io"
+		}
+	],
+	"keywords": [
+		"selenium",
+		"selenium-webdriver",
+		"css-testing",
+		"nightwatchjs",
+		"e2e-tests",
+		"visual-regression-testing",
+		"nightwatch"
+	],
+	"homepage": "https://github.com/Crunch-io/nightwatch-vrt",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Crunch-io/nightwatch-vrt.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Crunch-io/nightwatch-vrt/issues"
+	},
+	"types": "index",
+	"scripts": {
+		"lint": "eslint . --fix",
+		"pretty": "prettier --write \"./**/*.{css,html,js,json,xml}\"",
+		"test:dev": "jest --watch --notify",
+		"test": "jest --coverage",
+		"clean": "rimraf node_modules package-lock.json reports",
+		"prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\"",
+		"demo": "node demo/nightwatch.conf.js && run-p --race demo:start demo:nightwatch",
+		"demo:start": "http-server demo --silent",
+		"demo:nightwatch": "sleep 1 && nightwatch --config demo/nightwatch.conf.js --env phantomjs"
+	},
+	"jest": {
+		"roots": ["lib", "assertions", "commands", "tests"],
+		"testRegex": "-test\\.js$",
+		"coverageDirectory": "reports/coverage",
+		"coverageReporters": ["text-summary", "html"]
+	},
+	"dependencies": {
+		"jimp": "^0.16.2",
+		"lodash": "^4.17.21"
+	},
+	"devDependencies": {
+		"@prettier/plugin-xml": "^2.2.0",
+		"eslint": "^8.19.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"http-server": "^14.1.1",
+		"husky": "^8.0.3",
+		"jest": "^29.4.0",
+		"lint-staged": "^13.0.3",
+		"nightwatch": "^2.6.10",
+		"npm-run-all": "^4.1.5",
+		"phantomjs-prebuilt": "^2.1.16",
+		"prettier": "^2.8.3",
+		"rimraf": "^4.1.2",
+		"selenium-standalone": "^8.2.5"
+	},
+	"lint-staged": {
+		"*.{js}": ["eslint --cache --fix", "prettier --write"],
+		"*.{css,html,json,xml}": "prettier --write"
+	}
 }

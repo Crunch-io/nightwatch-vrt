@@ -1,8 +1,0 @@
-{
-  "extends": [
-    "crunch"
-  ],
-  "globals": {
-    "process": true
-  }
-}
