@@ -38,7 +38,6 @@
 		"test:dev": "jest --watch --notify",
 		"test": "jest --coverage",
 		"clean": "rimraf node_modules package-lock.json reports",
-		"prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\" && husky install",
 		"demo": "node demo/nightwatch.conf.js && run-p --race demo:start demo:nightwatch",
 		"demo:start": "http-server demo --silent",
 		"demo:nightwatch": "sleep 1 && nightwatch --config demo/nightwatch.conf.js --env phantomjs"
@@ -60,7 +59,6 @@
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-prettier": "^4.2.1",
 		"http-server": "^14.1.1",
-		"husky": "^8.0.1",
 		"jest": "^29.4.0",
 		"lint-staged": "^13.0.3",
 		"nightwatch": "^2.6.10",
@@ -69,9 +67,5 @@
 		"prettier": "^2.8.3",
 		"rimraf": "^4.1.2",
 		"selenium-standalone": "^8.2.5"
-	},
-	"lint-staged": {
-		"*.{js,ts}": ["eslint --cache --fix", "prettier --write"],
-		"*.{css,html,json,xml}": "prettier --write"
 	}
 }

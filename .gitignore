@@ -54,9 +54,6 @@ typings/
 # next.js build output
 .next
 
-# Husky
-.husky/_
-
 # Project
 .idea/
 *.iml

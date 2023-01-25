@@ -1,6 +1,5 @@
 # Project
 .eslintcache
-.husky/
 .idea/
 *.js
 node_modules
