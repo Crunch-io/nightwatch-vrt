@@ -38,7 +38,7 @@
 		"test:dev": "jest --watch --notify",
 		"test": "jest --coverage",
 		"clean": "rimraf node_modules package-lock.json reports",
-		"prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\"",
+		"prepare": "husky install",
 		"demo": "node demo/nightwatch.conf.js && run-p --race demo:start demo:nightwatch",
 		"demo:start": "http-server demo --silent",
 		"demo:nightwatch": "sleep 1 && nightwatch --config demo/nightwatch.conf.js --env phantomjs"

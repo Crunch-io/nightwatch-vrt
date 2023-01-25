@@ -1,16 +1,16 @@
-import * as nightwatch from "nightwatch";
-
 declare module "nightwatch" {
+    import * as nightwatch from "nightwatch";
+
     export interface NightwatchVRTSettings {
-      "baseline_screenshots_path"?: string;
-      "baseline_suffix"?: string;
-      "latest_screenshots_path"?: string;
-      "latest_suffix"?: string;
-      "diff_screenshots_path"?: string;
-      "diff_suffix"?: string;
-      "threshold"?: number;
-      "screenshotPath": (browser: NightwatchAPI) => string;
-      "prompt"?: boolean;
+        "baseline_screenshots_path"?: string;
+        "baseline_suffix"?: string;
+        "latest_screenshots_path"?: string;
+        "latest_suffix"?: string;
+        "diff_screenshots_path"?: string;
+        "diff_suffix"?: string;
+        "threshold"?: number;
+        "screenshotPath": (browser: NightwatchAPI) => string;
+        "prompt"?: boolean;
     }
 
     export interface NightwatchAssertions {
@@ -30,19 +30,19 @@ declare module "nightwatch" {
          *
          * @param {String} elementId Identifies the element that will be captured in the screenshot.
          * @param {String} fileName Optional file name for this screenshot; defaults to the selector
-         * @param {NightwatchVRTOptions} settings Optional settings to override the defaults and `visual_regression_settings`
+         * @param {NightwatchVRTSettings} settings Optional settings to override the defaults and `visual_regression_settings`
          * @param {String} message Optional message for `nightwatch` to log upon completion
          */
-        screenshotIdenticalToBaseline: (elementId: string, fileName?: string, options?: NightwatchVRTSettings, message?: string) => this;
+        screenshotIdenticalToBaseline: (elementId: string, fileName?: string, settings?: NightwatchVRTSettings, message?: string) => this;
     }
 
     export interface NightwatchAPI {
         /**
          * Takes a screenshot of the visible region encompassed by the bounding rectangle
          * of an element.
-        *
+         *
          * @link
-         * @param {string} selector Identifies the element that will be captured in the screenshot.
+            * @param {string} selector Identifies the element that will be captured in the screenshot.
          * @param {function} callback Callback function which is called with the captured screenshot as an argument.
          * @returns {Object} The captured screenshot. This object is a Jimp (library) image instance.
          */
