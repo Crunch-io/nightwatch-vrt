@@ -1,6 +1,6 @@
-'use strict'
+"use strict";
 
-const compareWithBaseline = require('../lib/compare-with-baseline')
+const compareWithBaseline = require("../lib/compare-with-baseline");
 
 /**
  * Asserts if a screenshot that captures the visual representation of
@@ -22,44 +22,44 @@ const compareWithBaseline = require('../lib/compare-with-baseline')
  * @param {String} message Optional message for `nightwatch` to log upon completion
  */
 exports.assertion = function screenshotIdenticalToBaseline(
-    elementId,
-    fileName = elementId,
-    settings,
-    message
+	elementId,
+	fileName = elementId,
+	settings,
+	message
 ) {
+	this.message =
+		message || `Visual regression test results for element <${elementId}>.`;
+	this.expected = true;
 
-    this.message = message || `Visual regression test results for element <${elementId}>.`
-    this.expected = true
+	this.pass = function pass(value) {
+		return value === this.expected;
+	};
 
-    this.pass = function pass(value) {
-        return value === this.expected
-    }
+	this.value = function value(result) {
+		return result;
+	};
 
-    this.value = function value(result) {
-        return result
-    }
+	this.command = function command(callback) {
+		let screenshot, comparisonResult;
 
-    this.command = function command(callback) {
-        let screenshot,
-            comparisonResult
+		this.api
+			.waitForElementVisible(elementId, 5000)
+			.captureElementScreenshot(elementId, (elementScreenshot) => {
+				screenshot = elementScreenshot;
+			})
+			.perform((done) => {
+				compareWithBaseline(this.api, screenshot, fileName, settings).then(
+					(result) => {
+						comparisonResult = result;
+						done();
+					}
+				);
+			})
+			.perform((done) => {
+				callback(comparisonResult);
+				done();
+			});
 
-        this
-            .api
-            .waitForElementVisible(elementId, 5000)
-            .captureElementScreenshot(elementId, (elementScreenshot) => {
-                screenshot = elementScreenshot
-            })
-            .perform((done) => {
-                compareWithBaseline(this.api, screenshot, fileName, settings).then((result) => {
-                    comparisonResult = result
-                    done()
-                })
-            })
-            .perform((done) => {
-                callback(comparisonResult)
-                done()
-            })
-
-        return this
-    }
-}
+		return this;
+	};
+};
